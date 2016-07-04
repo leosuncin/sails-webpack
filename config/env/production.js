@@ -9,6 +9,7 @@
  * any private information to this file!
  *
  */
+var webpack = require('webpack');
 
 module.exports = {
 
@@ -33,6 +34,24 @@ module.exports = {
 
   // log: {
   //   level: "silent"
-  // }
+  // },
+  webpack: {
+    config: {
+      plugins: [
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.optimize.DedupePlugin(),
+      new webpack.optimize.UglifyJsPlugin({
+        minimize: true,
+        output: { comments: false },
+        compress: { drop_console: true }
+      }),
+      new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery'
+      })
+    ]
+    }
+  }
 
 };
