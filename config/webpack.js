@@ -28,7 +28,19 @@ module.exports.webpack = {
       loaders: [
         {
           test: /\.css$/,
-          loaders: ['style', 'css?root=' + __dirname + '../assets', 'autoprefixer?browsers=last 2 versions'],
+          loaders: [
+            'style',
+            'css?root=' + __dirname + '../assets',
+            'autoprefixer?browsers=last 2 versions'
+          ],
+        },
+        {
+          test: /\.scss$/,
+          loaders: [
+            'style', 'css',
+            'autoprefixer-loader?browsers=last 2 versions',
+            'sass?sourceMap'
+          ],
         },
         {
           test: /\.png$/,
@@ -55,7 +67,16 @@ module.exports.webpack = {
           loader: 'url?limit=10000&mimetype=image/svg+xml'
         }
       ]
-    }
+    },
+    resolve: {
+        root: path.resolve(__dirname, '../assets/'),
+    },
+    sassLoader: {
+      includePaths: [
+        path.resolve(__dirname, '../assets/'),
+        path.resolve(__dirname, '../node_modules/compass-mixins/lib')
+      ]
+    },
   },
   watchOptions: {
     aggregateTimeout: 300
