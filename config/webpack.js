@@ -9,7 +9,10 @@ var path    = require('path');
 module.exports.webpack = {
 
   config: {
-    entry: path.resolve(__dirname, '../assets/js/app.js'),
+    entry: [
+      'babel-polyfill',
+      path.resolve(__dirname, '../assets/js/app.js')
+    ],
     output: {
       path: path.resolve(__dirname, '../.tmp/public/js'),
       filename: 'bundle.js'
@@ -44,11 +47,11 @@ module.exports.webpack = {
         },
         {
           test: /\.png$/,
-          loader: "url?limit=100000"
+          loader: 'url?limit=100000'
         },
         {
           test: /\.(jpg|gif)$/,
-          loader: "file"
+          loader: 'file'
         },
         {
           test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
@@ -65,11 +68,16 @@ module.exports.webpack = {
         {
           test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
           loader: 'url?limit=10000&mimetype=image/svg+xml'
+        },
+        {
+          test: /\.js$/,
+          loader: 'babel',
+          exclude: /node_modules/
         }
       ]
     },
     resolve: {
-        root: path.resolve(__dirname, '../assets/'),
+      root: path.resolve(__dirname, '../assets/'),
     },
     sassLoader: {
       includePaths: [
