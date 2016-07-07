@@ -14,10 +14,11 @@ module.exports.webpack = {
       path.resolve(__dirname, '../assets/js/app.js')
     ],
     output: {
-      path: path.resolve(__dirname, '../.tmp/public/js'),
+      path: path.resolve(__dirname, '../.tmp/public'),
       filename: 'bundle.js'
     },
     devtool: 'eval',
+    debug: process.env.NODE_ENV !== 'production',
     plugins: [
       new webpack.HotModuleReplacementPlugin({
         multiStep: true
@@ -35,6 +36,13 @@ module.exports.webpack = {
           test: /\.js$/,
           loader: 'eslint',
           exclude: /node_modules/
+        },
+        {
+          test: /.(jpg|jpeg|png|gif|svg)$/,
+          loader: 'image-webpack',
+          query: {
+            bypassOnDebug: true
+          }
         }
       ],
       loaders: [
@@ -100,6 +108,22 @@ module.exports.webpack = {
     },
     eslint: {
       failOnError: true
+    },
+    imageWebpackLoader: {
+      optimizationLevel: 6,
+      progressive: true,
+      interlaced: true,
+      use: [require('imagemin-mozjpeg')()],
+      pngquant: {
+        quality: '65-90',
+        speed: 4
+      },
+      svgo: {
+        plugins: [
+          { removeViewBox: false },
+          { removeUselessStrokeAndFill: false }
+        ]
+      }
     }
   },
   watchOptions: {

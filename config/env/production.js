@@ -38,19 +38,18 @@ module.exports = {
   webpack: {
     config: {
       plugins: [
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.UglifyJsPlugin({
-        minimize: true,
-        output: { comments: false },
-        compress: { drop_console: true }
-      }),
-      new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        'window.jQuery': 'jquery'
-      })
-    ]
+        new webpack.optimize.DedupePlugin(),
+        new webpack.ProvidePlugin({
+          $: 'jquery',
+          jQuery: 'jquery',
+          'window.jQuery': 'jquery'
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+          minimize: true,
+          output: { comments: false },
+          compress: { drop_console: true }
+        })
+      ]
     }
   }
 

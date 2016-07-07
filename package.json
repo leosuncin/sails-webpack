@@ -34,6 +34,8 @@
     "grunt-sails-linker": "~0.10.1",
     "grunt-sync": "0.2.4",
     "html-loader": "^0.4.3",
+    "image-webpack-loader": "^1.8.0",
+    "imagemin-mozjpeg": "^6.0.0",
     "include-all": "~0.1.6",
     "ng-annotate-loader": "^0.1.0",
     "ng-annotate-webpack-plugin": "^0.1.3",
