@@ -1,0 +1,12 @@
+{
+  "extends": "angular",
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "angular/di": [2],
+    "angular/on-watch": [0],
+    "angular/log": [1],
+    "angular/no-http-callback": [2]
+  }
+}

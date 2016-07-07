@@ -19,7 +19,9 @@ module.exports.webpack = {
     },
     devtool: 'eval',
     plugins: [
-      new webpack.HotModuleReplacementPlugin(),
+      new webpack.HotModuleReplacementPlugin({
+        multiStep: true
+      }),
       new webpack.optimize.DedupePlugin(),
       new webpack.ProvidePlugin({
         $: 'jquery',
@@ -28,6 +30,13 @@ module.exports.webpack = {
       })
     ],
     module: {
+      preLoaders: [
+        {
+          test: /\.js$/,
+          loader: 'eslint',
+          exclude: /node_modules/
+        }
+      ],
       loaders: [
         {
           test: /\.css$/,
@@ -85,6 +94,9 @@ module.exports.webpack = {
         path.resolve(__dirname, '../node_modules/compass-mixins/lib')
       ]
     },
+    eslint: {
+      failOnError: true
+    }
   },
   watchOptions: {
     aggregateTimeout: 300
