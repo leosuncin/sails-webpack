@@ -50,7 +50,7 @@ module.exports.webpack = {
           test: /\.scss$/,
           loaders: [
             'style', 'css',
-            'autoprefixer-loader?browsers=last 2 versions',
+            'autoprefixer?browsers=last 2 versions',
             'sass?sourceMap'
           ],
         },
@@ -80,8 +80,12 @@ module.exports.webpack = {
         },
         {
           test: /\.js$/,
-          loader: 'babel',
+          loader: 'ng-annotate?add=true!babel',
           exclude: /node_modules/
+        },
+        {
+          test: /.html$/,
+          loader: 'ngtemplate?relativeTo=' + __dirname + '/../assets!html?root=' + __dirname + '/../assets'
         }
       ]
     },
