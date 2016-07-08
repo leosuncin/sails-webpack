@@ -3,22 +3,29 @@
  * (sails.config.webpack)
  *
  */
-var webpack = require('webpack');
-var path    = require('path');
-var debug   = process.env.NODE_ENV === 'development';
-var entries = [
+var webpack               = require('webpack');
+var path                  = require('path');
+var WebpackNotifierPlugin = require('webpack-notifier');
+var debug                 = process.env.NODE_ENV === 'development';
+var entries               = [
   'babel-polyfill',
   path.resolve(__dirname, '../assets/js/app.js') // set your main javascript file
 ];
-var plugins = [
+var plugins               = [
   // prevents the inclusion of duplicate code into your bundle
   new webpack.optimize.DedupePlugin(),
   // expose globally jQuery and angular
   new webpack.ProvidePlugin({
     $: 'jquery',
     jQuery: 'jquery',
-    'window.jQuery': 'jquery',
-    angular: 'angular'
+    'window.jQuery': 'jquery'
+  }),
+  // build status system notifications
+  new WebpackNotifierPlugin({
+    // If set to true, warnings will not cause a notification.
+    excludeWarnings: true,
+    // Image shown in the notification.
+    contentImage: path.resolve(__dirname, '../assets/images/icon-webpack.png')
   })
 ];
 

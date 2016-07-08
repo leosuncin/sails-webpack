@@ -20,8 +20,5 @@ module.exports = {
   // models: {
   //   connection: 'someMongodbServer'
   // }
-  webpack: {
-
-  }
 
 };
